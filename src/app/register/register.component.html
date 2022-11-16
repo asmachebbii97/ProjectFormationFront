@@ -1,0 +1,127 @@
+
+  
+  <!-- ========================= SECTION CONTENT ========================= -->
+  <section class="section-content padding-y" >
+  
+    <!-- ============================ COMPONENT REGISTER   ================================= -->
+    <button  mat-dialog-close mat-icon-button style="float:right; color : black;background-color: transparent;"><mat-icon>close</mat-icon> </button>
+
+        <div class="card mx-auto" style="max-width:520px; margin-top:2%;overflow: auto;">
+          <article class="card-body">
+            <header class="mb-4"><h4 class="card-title" color="primary">Sign up</h4></header>
+            <form #f="ngForm"  *ngIf="!isSuccessful" 
+            name="form"
+            (ngSubmit)="f.form.valid && onSubmit()"
+            novalidate>
+            <div class="col form-group">
+              <label>username</label> <label class="eto"> * </label>
+                <input type="text" class="form-control" placeholder="" name="username"
+                [(ngModel)]="form.username"
+                required
+                minlength="3"
+                maxlength="20"
+                #username="ngModel" ngModel required >
+          </div> <!-- form-group end.// -->
+          <div class="alert-danger" *ngIf="f.submitted && username.invalid">
+            <div *ngIf="username.errors.required">Username is required</div>
+            <div *ngIf="username.errors.minlength">
+              Username must be at least 3 characters
+            </div>
+            <div *ngIf="username.errors.maxlength">
+              Username must be at most 20 characters
+            </div>
+          </div>
+                    <div class="form-row">
+                       
+                        <div class="col form-group">
+                          <label>First name</label> <label class="eto"> * </label>
+                            <input type="text" class="form-control" placeholder="" name="fname"
+                            [(ngModel)]="form.fname"
+                            required
+                            minlength="3"
+                            maxlength="20"
+                            #fname="ngModel" ngModel required >
+                      </div> <!-- form-group end.// -->
+                     
+                        <div class="col form-group">
+                            <label>Last name</label> <label class="eto"> * </label>
+                              <input type="text" class="form-control" placeholder=""  [(ngModel)]="form.lname" name="lname"   #lname="ngModel" ngModel required  required
+                              minlength="3"
+                              maxlength="20"
+                              #fname="ngModel" ngModel required>
+                        </div> <!-- form-group end.// -->
+                    </div> <!-- form-row end.// -->
+                    <div class="alert-danger" *ngIf="f.submitted && fname.invalid">
+                        <div *ngIf="fname.errors.required">fname is required</div>
+                        <div *ngIf="fname.errors.minlength">
+                            fname must be at least 3 characters
+                        </div>
+                        <div *ngIf="fname.errors.maxlength">
+                          fname must be at most 20 characters
+                        </div>
+                      </div>
+
+                    <div class="form-group">
+                        <label>Email</label> <label class="eto"> * </label>
+                        <input type="email" class="form-control" placeholder="" name="email" 
+                        [(ngModel)]="form.email"
+                        required
+                        email
+                        #email="ngModel" ngModel required >
+                        <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div> <!-- form-group end.// -->
+                    <div class="alert-danger" *ngIf="f.submitted && email.invalid">
+                        <div *ngIf="email.errors.required">Email is required</div>
+                        <div *ngIf="email.errors.email">
+                          Email must be a valid email address
+                        </div>
+                      </div>
+                    <div class="form-group ">
+                      <label for="name">Image</label>
+                    <input 
+                    *ngIf="!form.image" type="file" accept=".jpg,.svg,.png,.jpeg"
+                    (change)="handleProfilePictureInput($event.target.files)"required [(ngModel)]="form.image" >
+                    
+                    <img class="rounded" alt="rounded" [src]="form.image" name="image" style="height: 10%;width: 15%;">
+                   
+                      </div>
+                     <!-- form-row.// -->
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Create password</label> <label class="eto"> * </label>
+                            <input class="form-control" type="password" name="password"
+                            [(ngModel)]="form.password"
+                            required
+                            minlength="6"
+                            #password="ngModel" ngModel required >
+                        </div> <!-- form-group end.// --> 
+                        <div class="form-group col-md-6">
+                            <label>Repeat password</label> <label class="eto"> * </label>
+                            <input class="form-control" type="password" name="password"
+                            [(ngModel)]="form.password"
+                            required
+                            minlength="6"
+                            #password="ngModel" ngModel required >
+                        </div> <!-- form-group end.// -->  
+                    </div>
+                    <div class="alert-danger" *ngIf="f.submitted && password.invalid">
+                        <div *ngIf="password.errors.required">Password is required</div>
+                        <div *ngIf="password.errors.minlength">
+                          Password must be at least 6 characters
+                        </div>
+                      </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block">Sign Up</button>
+                    </div> <!-- form-group// -->      
+                    <div class="form-group"> 
+                        <label class="custom-control custom-checkbox"> <input type="checkbox" class="custom-control-input ab" checked=""> <div class="custom-control-label"> I am agree with <a href="#">terms and contitions</a>  </div> </label>
+                    </div> <!-- form-group end.// -->           
+                </form>
+            </article><!-- card-body.// -->
+        </div> <!-- card .// -->
+        <p class="text-center mt-4" >Have an account? <a href="" color="primary">Log In</a></p>
+        <br><br>
+    <!-- ============================ COMPONENT REGISTER  END.// ================================= -->
+    
+    
+    </section>

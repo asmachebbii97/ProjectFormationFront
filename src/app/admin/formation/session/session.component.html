@@ -1,0 +1,92 @@
+<div >
+    <section id="sample-table" class="mat-elevation-z8 bg-white" style="overflow: auto; ">
+      <button  mat-dialog-close mat-icon-button style="float:right; color : black;margin-top: 2%; background-color: transparent;"><mat-icon>close</mat-icon> </button>
+
+      <h1 mat-dialog-title  style="background-color: #b3cce6; text-align: center ; padding-top: 2%; padding-bottom:2%;color:#003366;border-radius: 10px;">Liste des sessions
+        <h3 style="padding-left: 1%;padding-bottom: -25px;" *ngIf="forma">Formation : {{forma.titre}}  Formation : {{forma.idFormation}}  </h3>
+     
+      
+      </h1>
+
+      <div fxLayout fxLayoutAlign="center center">
+        <mat-form-field fxFlex="40%">
+          <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+      </div>
+   <div style="float: right ; margin-right: 5%;margin-top: 3%;"> <button mat-icon-button style="color:#003366;margin-right:20px;margin-top: -20px;" (click)="AddSession(forma.idFormation)"  ><mat-icon>add_circle</mat-icon></button></div>  
+     
+      <table id="preloader" mat-table [dataSource]="dataSource" matSort matSortStart="desc" (matSortChange)="customSort($event)" class="w-100"  style="float:center;" >
+    
+        <ng-container matColumnDef="idSession" >
+          <th mat-header-cell *matHeaderCellDef mat-sort-header > id Session </th>
+          <td mat-cell *matCellDef="let listeSession"> {{listeSession.idSession}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="date_Fin">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> date fin </th>
+          <td mat-cell *matCellDef="let listeSession"> {{listeSession.date_Fin}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="date_Debut">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> date Debut</th>
+          <td mat-cell *matCellDef="let listeSession"> {{listeSession.date_Debut}} </td>
+        </ng-container>
+        <ng-container matColumnDef="lieu">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> lieu </th>
+          <td mat-cell *matCellDef="let listeSession"> {{listeSession.lieu}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="nb_participant">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> max nb participant  </th>
+          <td mat-cell *matCellDef="let listeSession"> {{listeSession.nb_participant }} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="formateur">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> formateur </th>
+          <td mat-cell *matCellDef="let listeSession"> {{listeSession.formateur.nom }}  {{listeSession.formateur.prenom}} </td>
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="organisme">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> organisme  </th>
+          <td mat-cell *matCellDef="let listeSession"> {{listeSession.org.libelle }} </td>
+        </ng-container>
+
+       
+
+
+        
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef> </th>
+          <td mat-cell *matCellDef="let listeSession ; " class="action-link"> 
+            <button mat-icon-button  style="margin-right: 1%; color:  #e28743;" (click)="UpdateSession(listeSession)" ><mat-icon>update</mat-icon></button>
+            <button  mat-icon-button style="color: red;"  (click)="Delete(listeSession.idSession)"><mat-icon>delete_forever</mat-icon></button>
+           <button mat-raised-button style="color:#003366;"   (click)="GetParticipant(listeSession)" > Participants </button> 
+            
+           
+          </td>
+        </ng-container>
+
+          
+        
+
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
+       
+      </table>
+      <mat-paginator [pageSize]="4" [pageSizeOptions]="[4, 8, 15, 50]"></mat-paginator>
+
+
+      
+    
+    </section> </div>
+    
+
+
+
+    
+

@@ -1,0 +1,81 @@
+<h1 mat-dialog-title  style="background-color: #b3cce6; text-align: center ; padding-top: 2%; padding-bottom:2%;color:#003366;border-radius: 10px;">Ajouter un participant</h1>
+<div mat-dialog-content>
+
+
+    <mat-card fxFlex.gt-xs="150" class="mb15">
+       
+        
+          <form class="example-form" #f="ngForm" [formGroup]="Form" autocomplete="off" novalidate>
+           
+                       
+            <mat-form-field class="example-full-width"> <input matInput placeholder="nom"   type="text" formControlName="nom" ngModel required [(ngModel)]="participant.nom"> 
+              <mat-error *ngIf="hasError('nom', 'required')">Nom est obligatoire</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width"> <input matInput placeholder="prenom"   type="text" formControlName="prenom" ngModel required [(ngModel)]="participant.prenom"> 
+              <mat-error *ngIf="hasError('prenom', 'required')">prenom est obligatoire</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width"> <input matInput placeholder="email"   type="email" formControlName="email" ngModel required [(ngModel)]="participant.email"> 
+              <mat-error *ngIf="hasError('email', 'required')">email est obligatoire</mat-error>
+              <mat-error *ngIf="hasError('email', 'email')">Email doit etre valide </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width"> <input matInput placeholder="tlf"   type="number" formControlName="tlf" ngModel required [(ngModel)]="participant.tlf"> 
+              <mat-error *ngIf="hasError('tlf', 'required')">tlf est obligatoire</mat-error>
+              <mat-error *ngIf="hasError('tlf', 'min')">Téléphone doit avoir 8 nombres au minimum</mat-error>
+
+            </mat-form-field>
+            
+            
+        
+
+
+
+            <mat-form-field class="example-full-width" *ngIf="pays" >
+                <mat-select placeholder="pays" (selectionChange)="changePays($event.value)" formControlName="pays_pay_id"  required   [(ngModel)]="participant.pays_pay_id">
+                <mat-option  *ngFor="let p of pays"   [value]="p.payId">
+                  {{p.libele}}  
+                </mat-option>
+                
+              </mat-select>
+              <mat-error *ngIf="hasError('pays_pay_id', 'required')">pays est obligatoire</mat-error>
+            </mat-form-field>
+
+
+            <mat-form-field class="example-full-width" *ngIf="profils" >
+                <mat-select placeholder="profils" (selectionChange)="changeProfils($event.value)" formControlName="p_profil_id"  required   [(ngModel)]="participant.p_profil_id">
+                <mat-option  *ngFor="let pr of profils"   [value]="pr.idProfil">
+                  {{pr.libelle}} 
+                </mat-option>
+                
+              </mat-select>
+              <mat-error *ngIf="hasError('p_profil_id', 'required')">profil est obligatoire</mat-error>
+            </mat-form-field>
+
+
+            <mat-form-field class="example-full-width" *ngIf="TypesP">
+                <mat-select placeholder="Type de participant" formControlName="typep" ngModel required [(ngModel)]="participant.typeP" >
+                <mat-option *ngFor="let typ of TypesP" [value]="typ" > {{typ}}</mat-option>
+                
+              </mat-select>
+              <mat-error *ngIf="hasError('typep', 'required')">typep est obligatoire</mat-error>
+            </mat-form-field> 
+                
+
+
+          </form>
+       
+      </mat-card>
+
+
+
+
+
+  
+</div>
+<div mat-dialog-actions style="float:right;">
+  <button mat-raised-button  style="background-color:#003366;color:white;"  (click)="AddParticipant()" >ok</button>
+  <button mat-raised-button  style="background-color:#e28743;;color:white;"(click)="reset()">Reset</button>
+    <button  mat-dialog-close class mat-raised-button style="background-color:#eeeee4;color:black;">Close</button>
+</div>

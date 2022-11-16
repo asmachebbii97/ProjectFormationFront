@@ -1,0 +1,47 @@
+
+<div id="preloader">
+    <section id="sample-table" class="mat-elevation-z8 bg-white" style="margin-top: 10%; margin-left:20%;width: 50%;">
+      <h3 style="padding-left: 5%; padding-top: 5%;padding-bottom: -25px;">Liste des Domaines disponible </h3>
+   <div style="float: right ; margin-right: 5%;margin-top: 3%;"> 
+    <button mat-icon-button style="color:#003366;margin-right:20px;margin-top: -20px;" (click)="AddDialog()"><mat-icon>add_circle</mat-icon></button></div>  
+    
+
+    <div fxLayout fxLayoutAlign="center center">
+      <mat-form-field fxFlex="40%">
+        <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+    </div>
+
+    
+    
+    <table id="preloader" mat-table [dataSource]="dataSource" matSort class="w-100"  style="float:center;">
+      <ng-container  matColumnDef="idDomaine">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> id </th>
+          <td mat-cell *matCellDef="let domaines"> {{domaines.idDomaine}} </td>
+        </ng-container>
+                <ng-container  matColumnDef="libelle">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> libelle </th>
+          <td mat-cell *matCellDef="let domaines" type="string"> {{domaines.libelle}} </td>
+        </ng-container>
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef> </th>
+          <td mat-cell *matCellDef="let domaines ; " class="action-link"> 
+            <button style="margin-right: 5%;" mat-raised-button style="background-color: #e28743; color:white; margin-right: 10px;" (click)="ModifDialog(domaines)" ><mat-icon>update</mat-icon></button>
+            <button mat-raised-button color="warn"  (click)="Delete(domaines)"><mat-icon>delete_forever</mat-icon></button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
+       
+      </table>
+      <mat-paginator   #paginator   [pageSize]="4" [pageSizeOptions]="[4, 10, 25, 100]"></mat-paginator>
+    
+    </section>
+    
+  </div>
+
+
+
+    
+
+

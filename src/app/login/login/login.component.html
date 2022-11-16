@@ -1,0 +1,56 @@
+<div *ngIf="isLoggedIn"><button type="button" mat-button  class="w-100 "   color ="primary" (click)="logout()" > Ops ! Return to dashboard</button>
+</div>
+<div class="login-page"      >
+  <div class="content px20">
+    <form class="login-form" #myForm="ngForm"  [formGroup]="Form"  #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()"
+
+    *ngIf="!isLoggedIn"
+    >
+      <div class="text-center">
+        <h2 class="app-name ab">Sign in</h2>
+      </div>
+      <div fxLayout="row">
+        <div fxFlexFill>
+          <mat-form-field class="w-100">
+            <input matInput placeholder="Email or username"  formControlName="username" name="username"
+            [(ngModel)]="form.username"
+            required
+          >
+          
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <input matInput type="password" formControlName="password" placeholder="Password" [(ngModel)]="form.password"
+            required
+            minlength="6"
+          />
+        
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between" fxLayout.xs="column" class="mt20 mb20">
+        <mat-checkbox color="primary" [ngStyle.xs]="{'margin-bottom.px': 10}">Remember Me</mat-checkbox>
+        <a href="javascript:void(0)" class="ab">Forgot Password</a>
+      </div>
+      <div fxLayout="row">
+        <div fxFlexFill>
+          <button class="btn btn-primary btn-block"[disabled]="f.form.invalid ">Login</button>
+          <button type="button" mat-button  class="w-100 "   color ="primary"           (click)="register()"  >Sign Up</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="f.submitted && isLoginFailed"
+        >
+          Login failed: {{ errorMessage }}
+        </div>
+      </div>
+
+    </form>
+   
+    
+    </div>
+    
+
+

@@ -1,0 +1,69 @@
+<h1 mat-dialog-title  style="background-color: #b3cce6; text-align: center ; padding-top: 2%; padding-bottom:2%;color:#003366;border-radius: 10px;">Modifier session</h1>
+<div mat-dialog-content>
+
+
+    <mat-card fxFlex.gt-xs="150" class="mb15">
+       
+        
+          <form class="example-form" #f="ngForm" [formGroup]="Form" autocomplete="off" novalidate>
+           
+                       
+            <mat-form-field class="example-full-width"> <input matInput placeholder="Lieu"   type="text" formControlName="Lieu" ngModel required [(ngModel)]="data.message.lieu"> </mat-form-field>
+            <mat-error *ngIf="hasError('Lieu', 'required')">Lieu est obligatoire</mat-error>
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker" placeholder="Date_Debut"  formControlName="Date_Debut" ngModel required [(ngModel)]="data.message.date_Debut">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <mat-error *ngIf="hasError('Date_Debut', 'required')">Date Debut est obligatoire</mat-error>
+            </mat-form-field>
+
+
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker2" placeholder="Date_Fin"  formControlName="Date_Fin"  ngModel required [(ngModel)]="data.message.date_Fin">
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+              <mat-error *ngIf="hasError('Date_Fin', 'required')">Date Fin est obligatoire</mat-error>
+            </mat-form-field>
+           
+           
+            <mat-form-field class="example-full-width"> <input matInput placeholder="nb_participant"  formControlName="nb_participant" type="number" ngModel required [(ngModel)]="data.message.nb_participant"> </mat-form-field>
+    
+            <mat-form-field class="example-full-width" *ngIf="formateurs" >
+                <mat-select placeholder="formateur" (selectionChange)="changeFormateur($event.value)" formControlName="formateur_formateur_id"  required   [(ngModel)]="data.message.formateur.idFormateur">
+                <mat-option  *ngFor="let f of formateurs"   [value]="f.idFormateur">
+                  {{f.nom}}  {{f.prenom}}
+                </mat-option>
+                
+              </mat-select>
+              <mat-error *ngIf="hasError('nb_participant', 'required')">nb participant est obligatoire</mat-error>
+            </mat-form-field>
+
+
+            <mat-form-field class="example-full-width" *ngIf="organismes" >
+                <mat-select placeholder="organisme" (selectionChange)="changeOrganisme($event.value)" formControlName="org_organisme_id"  required   [(ngModel)]="data.message.org.idOrganisme">
+                <mat-option  *ngFor="let o of organismes"   [value]="o.idOrganisme">
+                  {{o.libelle}} 
+                </mat-option>
+                
+              </mat-select>
+              <mat-error *ngIf="hasError('org_organisme_id', 'required')">organisme est obligatoire</mat-error>
+            </mat-form-field>
+
+                
+
+
+          </form>
+       
+      </mat-card>
+
+
+
+
+
+  
+</div>
+<div mat-dialog-actions style="float:right;">
+  <button mat-raised-button  style="background-color:#003366;color:white;" (click)="UpdSession()" [disabled]="!Form.valid" >ok</button>
+  <button mat-raised-button  style="background-color:#e28743;;color:white;"(click)="reset()">Reset</button>
+    <button  mat-dialog-close class mat-raised-button style="background-color:#eeeee4;color:black;">Close</button>
+</div>

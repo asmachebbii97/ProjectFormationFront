@@ -1,0 +1,41 @@
+<mat-nav-list>
+  <a
+    *ngFor="let item of routes"
+    mat-list-item
+    [routerLinkActive]="'active'"
+    [routerLink]="['/', item.path]"
+  >
+    <mat-icon class="sidenav-icon">{{ item.data.icon }}</mat-icon>
+   <label style="color: #003366;">{{ item.data.text }}</label> 
+  </a>
+ 
+
+  <div class="nested-menu">
+    <a mat-list-item (click)="showMenu = !showMenu">
+      <mat-icon class="sidenav-icon">drag_indicator</mat-icon> <label style="color: #003366;">Gestion des nomeclatures</label> <mat-icon>keyboard_arrow_down</mat-icon>
+    </a>
+    <ul class="nested submenu" [class.expand]="showMenu">
+      <li>
+        <a href="javascript:void(0)"  [routerLinkActive]="'active'" [routerLink]="['/organisme']">
+          <span><mat-icon> business</mat-icon>Organisme</span>
+        </a>
+      </li>
+      <li>
+        <a href="javascript:void(0)"  [routerLinkActive]="'active'" [routerLink]="['/domaine']">
+          <span><mat-icon>find_in_page</mat-icon>Domaine</span>
+        </a>
+      </li>
+      <li>
+        <a href="javascript:void(0)"  [routerLinkActive]="'active'" [routerLink]="['/Profil']">
+          <span><mat-icon> contacts</mat-icon>Profils</span>
+        </a>
+      </li>
+      <li>
+        <a href="javascript:void(0)"  [routerLinkActive]="'active'" [routerLink]="['/Pays']">
+          <span><mat-icon> location_on</mat-icon>Pays</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</mat-nav-list>
